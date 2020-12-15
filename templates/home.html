@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Lock with your face!</title>
+    <style>
+        /* Style Settings */
+        @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+
+        :root {
+            --bgColor: #1C1C1C;
+            --accentColor: #E6E6E6;
+            --font: 'Karla', sans-serif;
+        }
+
+        body {
+            background-color: var(--bgColor);
+        }
+
+        #userPhoto {
+            width: 110px;
+            height: 110px;
+            display: block;
+            margin: 35px auto 20px;
+            border-radius: 50%;
+        }
+
+        #userName {
+            color: #bbb;
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.25;
+            display: block;
+            font-family: var(--font);
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        #links {
+            max-width: 675px;
+            width: auto;
+            display: block;
+            margin: 27px auto;
+        }
+
+        .link {
+            display: block;
+            background-color: var(--accentColor);
+            color: var(--bgColor);
+            font-family: var(--font);
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 17px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all .25s cubic-bezier(.08, .59, .29, .99);
+            border: solid var(--accentColor) 2px;
+        }
+
+        .link:hover {
+            background-color: var(--bgColor);
+            color: var(--accentColor);
+        }
+    </style>
+</head>
+
+<body>
+    <img id="userPhoto" src="https://i.imgur.com/t8ZX9um.jpg" alt="User Photo">
+
+    <a href="#" id="userName">@Lock with your face!</a>
+    <div id="links">
+        <a class="link" href="./lock/" target="_blank">Lock file</a>
+        <a class="link" href="./unlock/" target="_blank">Unlock file</a>
+    </div>
+    <!-- <div>
+        <iframe src="./unlock/" frameborder="0" width="100%" height="100%"></iframe>
+    </div> -->
+</body>
+
+</html>
