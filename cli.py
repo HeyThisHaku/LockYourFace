@@ -11,7 +11,8 @@ while inp != 3:
     print("Recognizer App")
     print("=================")
     print("1. Face Recognition")
-    print("2. Live Recognition")
+    print("2. Live Recognition lock")
+    print("3. Live Recognition unlock")
     print("3. Exit")
     print(">> ", end="")
     inp = int(input())
@@ -21,7 +22,10 @@ while inp != 3:
         core.test()
     elif(inp == 2):
         clsr()
-        core.live()
+        core.live('lock')
+    elif(inp == 3):
+        clsr()
+        core.live('unlock')
         
         
         

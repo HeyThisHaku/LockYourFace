@@ -5,6 +5,8 @@ import os
 import math
 import time
 import flask
+import ctypes  
+import easygui
 
 OBJECT_PATH = ""
 SCENE_PATH = ""
@@ -15,6 +17,7 @@ class_list = []
 person_name = os.listdir(train_path)
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 face_recognizer = ""
+
 
 def test():
     #Test
@@ -56,8 +59,9 @@ def detect_face():
     face_recognizer.train(face_list, np.array(class_list))
 
 
-def live():
+def live(state,path):
     cap = cv2.VideoCapture(1)
+    point_face = 0
     while(True):
         ret, frame = cap.read()
         result = cap.read()
@@ -96,7 +100,22 @@ def live():
             frame = buffer.tobytes()
             yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
             if confidence/100 > 85:
+                point_face += 1
+                print(point_face)
                 print("KENA!")
-    cap.release()
+            else:
+                point_face = 0
+            if point_face >= 25:
+                if state == 'lock':
+                    print("LOCKED!")
+                    os.system("python locker.py {} e".format(path))
+                    easygui.msgbox("Lock Success, encrypt file succes!!", title="Alert")
+                    return True
+                elif state == 'unlock':
+                    print("UNLOCKED!")
+                    os.system("python locker.py {} d".format(path))
+                    easygui.msgbox("Lock Success, decrypt file succes!!", title="Alert")
+                    return True
+    # cap.release()
     # cv2.destroyAllWindows()
 

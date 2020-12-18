@@ -1,24 +1,35 @@
-from flask import Flask,render_template,Response,redirect
+from flask import Flask, render_template, Response, redirect, request
 import core
 
-#training
+# training
 core.detect_face()
-
 app = Flask(__name__)
+
+
 @app.route('/')
 def index():
     return render_template('home.html')
 
-@app.route('/lock/')
-def lock():
-    return 'Waiting.... program will running <br> <a href="localhost:5000/">Back</a>'
 
-@app.route('/unlock/')
+@app.route('/lock/', methods=['POST'])
+def lock():
+    try:
+        if request.method == 'POST':
+            path = request.form.get('path')
+            return Response(core.live('lock',path), mimetype='multipart/x-mixed-replace; boundary=frame')
+    except Exception as e:
+        print(e)
+
+
+@app.route('/unlock/', methods=['POST'])
 def unlock():
-    if(core.live() is True):
-        return redirect("localhost:5000/", code=302)
-    else:
-        return Response(core.live(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    try:
+        if request.method == 'POST':
+            path = request.form.get('path')
+            return Response(core.live('unlock',path), mimetype='multipart/x-mixed-replace; boundary=frame')
+    except Exception as e:
+        print(e)
+
 
 if __name__ == '__main__':
     app.run()
